@@ -7,21 +7,33 @@
 
 function averageMark(a, g, p) {
 	
-    // реализуйте здесь задание №1
-    
-	return // ваш ответ;
+	let algebra = a;
+	let geography = g;
+	let physics = p;
+
+	return (algebra + geography + physics) / 3; // я не поняла, зачем нам переменные, почему нельзя просто написать: (a + g + p)/3 ??
+	// и тем более не поняла, какой смысл искать среднюю по разным предметам ( все равно что среднюю t по больнице)
 }
 
 function sayHello(userName) {
 	
-    // реализуйте здесь задание №2
+	let myName = userName;
+	let message = `Привет, мир! Меня зовут ${myName}`;
     
-	return // ваш ответ;
+	return message;
 }
 
 function calculateFormula() {
     
-	// реализуйте здесь задание №3
+	let x;
+	let y;
+	let z;
+
+	x = 2;
+	y = 22;
+	z = 0;
+
+	let resalt = x * y + 5 * z + x - 1;
     
-    return // ваш ответ;
+    return resalt;
 }
