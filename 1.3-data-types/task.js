@@ -1,21 +1,38 @@
 "use strict";
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
-    let parametres = [
-        {title: 'Процентная ставка', incommingData: percent, processingData: 0}, // Пробовала ничего не присваивать ключу processingData- ругается.
-        {title: 'Первоначальный взнос', incommingData: contribution , processingData: 0}, // Как грамотно это сделать? Пока присвоила 0 для начала.
-        {title: 'Сумма кредита', incommingData: amount , processingData: 0}
-    ];
-    for (let i = 0; i < parametres.length; i++) {
-        if (isNaN(parametres[i].incommingData)) {
-            return `Параметр ${parametres[i].title} содержит неправильное значение ${parametres[i].incommingData}`;
-        }
-        else parametres[i].processingData = parseFloat(parametres[i].incommingData);
-    }
+    // Это был самый первый вариант
 
-    let percentNumber = parseFloat(percent);
-    let contributionNumber = parseFloat(contribution);
-    let amountNumber = parseFloat(amount);
+    // let percentNumber = parseFloat(percent);  
+    // let contributionNumber = parseFloat(contribution);
+    // let amountNumber = parseFloat(amount);
+
+    // Это был второй вариант
+
+    // let parametres = [
+    //     {title: 'Процентная ставка', incommingData: percent, processingData: 0}, // Пробовала ничего не присваивать ключу processingData- ругается.
+    //     {title: 'Первоначальный взнос', incommingData: contribution , processingData: 0}, // Как грамотно это сделать? Пока присвоила 0 для начала.
+    //     {title: 'Сумма кредита', incommingData: amount , processingData: 0}
+    // ];
+    // for (let i = 0; i < parametres.length; i++) {
+    //     if (isNaN(parametres[i].incommingData)) {
+    //         return `Параметр ${parametres[i].title} содержит неправильное значение ${parametres[i].incommingData}`;
+    //     }
+    //     else parametres[i].processingData = parseFloat(parametres[i].incommingData);
+    // }
+
+    // Это третий вариант
+
+    function checkIncommingData(incommingData, title) {
+        if (isNaN(incommingData)) {
+                return `Параметр ${title} содержит неправильное значение ${incommingData}`;
+          }
+            return parseFloat(incommingData);
+    }
+    
+    let percentNumber = checkIncommingData(percent, 'Процентная ставка');
+    let contributionNumber = checkIncommingData(contribution, 'Первоначальный взнос');
+    let amountNumber = checkIncommingData(amount, 'Сумма кредита');
 
     let percentPerMonth = percentNumber / 100 / 12;
 
@@ -33,6 +50,8 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     //Я сознательно включила первоначальный взнос, так мне кажется более правильным и соответствует условию.
 }
 
+
+// Задача 2.
 
 function getGreeting(name) {
     let nameForOutput = name ? name : 'Аноним'; //Вот тут не поняла, а как зщащититься от знаков препинания, смайликов и цифр вместо имени?
