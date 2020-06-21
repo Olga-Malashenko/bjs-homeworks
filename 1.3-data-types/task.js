@@ -25,14 +25,26 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
     function checkIncommingData(incommingData, title) {
         if (isNaN(incommingData)) {
-                return `Параметр ${title} содержит неправильное значение ${incommingData}`;
-          }
-            return parseFloat(incommingData);
+            console.log('не число');
+           
+            return `Параметр ${title} содержит неправильное значение ${incommingData}`;
+          }     
     }
     
-    let percentNumber = checkIncommingData(percent, 'Процентная ставка');
-    let contributionNumber = checkIncommingData(contribution, 'Первоначальный взнос');
-    let amountNumber = checkIncommingData(amount, 'Сумма кредита');
+    checkIncommingData(percent, 'Процентная ставка');
+    checkIncommingData(contribution, 'Первоначальный взнос');
+    checkIncommingData(amount, 'Сумма кредита');
+
+    function changeType(incommingData) {
+        return parseFloat(incommingData);
+    }
+
+    let percentNumber = changeType(percent);
+    console.log('проценты ' + percentNumber);
+    let contributionNumber = changeType(contribution);
+    console.log('взнос ' + contributionNumber);
+    let amountNumber = changeType(amount);
+    console.log('сумма ' + amountNumber);
 
     let percentPerMonth = percentNumber / 100 / 12;
 
@@ -43,11 +55,13 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let quantityOfMonth = (date.getMonth() - currentDate.getMonth()) + quantityOfYear * 12;
 
     let payment = loan * (percentPerMonth + percentPerMonth / (Math.pow((1 + percentPerMonth), quantityOfMonth) - 1));
-    let totalAmount = (contributionNumber + payment * quantityOfMonth).toFixed(2);
-    console.log(`Сумма, которую клиент заплатит банку: ${totalAmount}\nВ том числе:\n\tПервоначальный взнос ${contributionNumber}\n\tПогашение основного долга ${loan}\n\tПроценты за пользование кредитом ${(payment * quantityOfMonth - loan).toFixed(2)}`);
-    return totalAmount;  //В условии задачи перечислено, что должно входить в эту сумму, в т.ч. первоначальный взнос. В проверочных данных ниже
-    //очевидно, что задача решена иначе - без первоначального взноса в общей сумме. Хорошо бы Нетологии поправить в одном из двух ))
+    let totalAmount = (contributionNumber + payment * quantityOfMonth).toFixed(2);  //В условии задачи перечислено, что должно входить в эту сумму, в т.ч. первоначальный взнос. В проверочных данных ниже
+    //очевидно, что задача решена иначе - без первоначального взноса в общей сумме. Хорошо бы Нетологии поправить в одном из двух пунктах))
     //Я сознательно включила первоначальный взнос, так мне кажется более правильным и соответствует условию.
+
+    // console.log(typeof totalAmount);  Не понимаю, на что ругается Жасмин - тип number - что еще надо? 
+    console.log(`Сумма, которую клиент заплатит банку: ${totalAmount}\nВ том числе:\n\tПервоначальный взнос ${contributionNumber}\n\tПогашение основного долга ${loan}\n\tПроценты за пользование кредитом ${(payment * quantityOfMonth - loan).toFixed(2)}`);
+    return Number(totalAmount);  //Зачем здесь явное преобразование, если это и так показывало числа? Я использовала Number? но совсем не поняла, зачем?!
 }
 
 
